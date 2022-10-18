@@ -3,13 +3,13 @@ package driver
 import (
 	"context"
 	"errors"
-
-	"github.com/pluralsh/database-postgres-driver/pkg/postgres"
-	"k8s.io/klog"
+	"fmt"
 
 	databasespec "github.com/pluralsh/database-interface-api/spec"
+	"github.com/pluralsh/database-postgres-driver/pkg/postgres"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"k8s.io/klog"
 )
 
 func NewDriver(provisioner string, postgresDB *postgres.Postgres) (*IdentityServer, *ProvisionerServer) {
@@ -63,7 +63,8 @@ func (ps *ProvisionerServer) DriverGrantDatabaseAccess(_ context.Context, req *d
 		"DB_USER":     ps.postgresDB.User,
 		"DB_PASSWORD": ps.postgresDB.Password,
 		"DB_HOST":     ps.postgresDB.Host,
-		"DB_PORT":     string(ps.postgresDB.Port),
+		"DB_PORT":     fmt.Sprintf("%d", ps.postgresDB.Port),
+		"DB_NAME":     req.DatabaseId,
 	}}
 
 	return resp, nil

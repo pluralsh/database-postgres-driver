@@ -56,22 +56,22 @@ func init() {
 		"path to unix domain socket where driver should listen")
 	stringFlag(&dbUser,
 		"db-user",
-		"u",
+		"",
 		dbUser,
 		"postgres user")
 	stringFlag(&dbPassword,
 		"db-password",
-		"pwd",
+		"",
 		dbPassword,
 		"postgres password")
 	stringFlag(&dbHost,
 		"db-host",
-		"h",
+		"",
 		dbHost,
 		"postgres host name")
 	intFlag(&dbPort,
 		"db-port",
-		"p",
+		"",
 		dbPort,
 		"postgres port number")
 

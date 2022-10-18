@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
+	_ "github.com/lib/pq"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"k8s.io/klog/v2"
@@ -80,7 +81,8 @@ func (c *Postgres) CreateDatabase(dbName string) (err error) {
 			return status.Error(codes.AlreadyExists, "Database already exists")
 		}
 	}
-	db, err := sql.Open("postgres", c.ConnectionString(""))
+	connection := c.ConnectionString("")
+	db, err := sql.Open("postgres", connection)
 	if err != nil {
 		return status.Error(codes.Internal, fmt.Sprintf("Can't connect %v", err))
 	}
