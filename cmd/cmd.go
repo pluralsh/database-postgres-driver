@@ -14,7 +14,7 @@ import (
 	"k8s.io/klog"
 )
 
-const provisionerName = "fake.database.plural.sh"
+const provisionerName = "postgres.database.plural.sh"
 
 var (
 	driverAddress = "unix:///var/lib/database/database.sock"
