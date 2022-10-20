@@ -90,12 +90,15 @@ func run(ctx context.Context, args []string) error {
 		Host:     dbHost,
 		Port:     dbPort,
 	}
+	klog.Info("\nuser:", dbUser, "\nhost:", dbHost, "\nport:", dbPort, "\n")
 	identityServer, databaseProvisioner := driver.NewDriver(provisionerName, postgresDB)
 	server, err := provisioner.NewDefaultProvisionerServer(driverAddress,
 		identityServer,
 		databaseProvisioner)
 	if err != nil {
+		klog.Errorf("Failed to create provisioner server %v", err)
 		return err
 	}
+	klog.Info("Starting Postgres provisioner")
 	return server.Run(ctx)
 }
