@@ -34,8 +34,10 @@ func (ps *ProvisionerServer) DriverCreateDatabase(_ context.Context, req *databa
 	databaseName := req.GetName()
 	klog.Info("Create Database", "name", databaseName)
 	if err := ps.postgresDB.CreateDatabase(databaseName); err != nil {
-		klog.Errorf("Failed to create database %v", err)
-		return &databasespec.DriverCreateDatabaseResponse{}, err
+		if status.Code(err) != codes.AlreadyExists {
+			klog.Errorf("Failed to create database %v", err)
+			return &databasespec.DriverCreateDatabaseResponse{}, err
+		}
 	}
 
 	return &databasespec.DriverCreateDatabaseResponse{
