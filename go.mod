@@ -3,7 +3,7 @@ module github.com/pluralsh/database-postgres-driver
 go 1.18
 
 require (
-	github.com/lib/pq v1.10.7
+	github.com/lib/pq v1.10.9
 	github.com/pluralsh/database-interface-api v0.0.3
 	github.com/pluralsh/database-interface-controller v0.0.0-20221007104854-a23cf39463ad
 	github.com/spf13/cobra v1.6.0
